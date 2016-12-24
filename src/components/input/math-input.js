@@ -155,6 +155,9 @@ const MathInput = React.createClass({
                 }
             }
 
+            var outputdiv = document.getElementById('output');
+            outputdiv.innerHTML=this.mathField.getContent();
+
         };
 
         this.recordTouchStartOutside = (evt) => {
