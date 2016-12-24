@@ -23,6 +23,7 @@ const EmptyKeypadButton = React.createClass({
         // we don't need it to know about their DOM nodes, as it doesn't need
         // to focus them or trigger presses.
         return <KeypadButton
+            onClick={(evt) => gestureManager.onClickStart(evt)}
             onTouchStart={(evt) => gestureManager.onTouchStart(evt)}
             onTouchEnd={(evt) => gestureManager.onTouchEnd(evt)}
             onTouchMove={(evt) => gestureManager.onTouchMove(evt)}

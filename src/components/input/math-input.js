@@ -108,7 +108,9 @@ const MathInput = React.createClass({
         // input on non-scrolls--blurring the input on scroll makes for a
         // frustrating user experience.
         this.touchStartInitialScroll = null;
-        this.recordTouchStartOutside = (evt) => {
+
+        this.recordClickStartOutside = (evt) => {
+            console.log("mathinput recordClickStartOutside");
             if (this.state.focused) {
                 // Only blur if the touch is both outside of the input, and
                 // above or to the left or right of the keypad (if it has been
@@ -121,6 +123,55 @@ const MathInput = React.createClass({
                     let touchDidStartInOrBelowKeypad = false;
                     if (this.props.keypadElement) {
                         const bounds = this._getKeypadBounds();
+                        console.log("componentDidMount.recordClickStartOutside"+evt.clientX+" "+evt.clientY);
+
+                        const [x, y] = [
+                                evt.clientX,
+                                evt.clientY,
+                            ];
+                        if ((bounds.left <= x && bounds.right >= x &&
+                                bounds.top <= y && bounds.bottom >= y) ||
+                                bounds.bottom < y) {
+                            touchDidStartInOrBelowKeypad = true;
+                        }
+
+                    }
+
+                    if (!touchDidStartInOrBelowKeypad) {
+
+                        console.log("componentDidMount.recordClickStartOutside outside");
+
+                        this.didTouchOutside = true;
+
+                        if (this.state.focused && this.didTouchOutside && !this.didScroll) {
+                            this.blur();
+                        }
+
+                        this.didTouchOutside = false;
+                        this.didScroll = false;
+                    }
+
+                   
+                }
+            }
+
+        };
+
+        this.recordTouchStartOutside = (evt) => {
+            console.log("mathinput recordTouchStartOutside");
+            if (this.state.focused) {
+                // Only blur if the touch is both outside of the input, and
+                // above or to the left or right of the keypad (if it has been
+                // provided). The reasoning for not blurring when touches occur
+                // below the keypad is that the keypad may be anchored above
+                // the 'Check answer' bottom bar, in which case, we don't want
+                // to dismiss the keypad on check.
+                // TODO(charlie): Inject this logic.
+                if (!this._container.contains(evt.target)) {
+                    let touchDidStartInOrBelowKeypad = false;
+                    if (this.props.keypadElement) {
+                        const bounds = this._getKeypadBounds();
+                        console.log("componentDidMount.recordTouchStartOutside");
                         for (let i = 0; i < evt.changedTouches.length; i++) {
                             const [x, y] = [
                                 evt.changedTouches[i].clientX,
@@ -153,6 +204,7 @@ const MathInput = React.createClass({
         };
 
         this.blurOnTouchEndOutside = (evt) => {
+            console.log("math-input: blurOnTouchEndOutside");
             // If the user didn't scroll, blur the input.
             // TODO(charlie): Verify that the touch that ended actually started
             // outside the keypad. Right now, you can touch down on the keypad,
@@ -172,6 +224,7 @@ const MathInput = React.createClass({
             }
         };
 
+        window.addEventListener('click', this.recordClickStartOutside);
         window.addEventListener('touchstart', this.recordTouchStartOutside);
         window.addEventListener('touchend', this.blurOnTouchEndOutside);
         window.addEventListener('touchcancel', this.blurOnTouchEndOutside);
@@ -200,6 +253,7 @@ const MathInput = React.createClass({
     },
 
     componentWillUnmount() {
+        window.removeEventListener('click', this.recordClickStartOutside);
         window.removeEventListener('touchstart', this.recordTouchStartOutside);
         window.removeEventListener('touchend', this.blurOnTouchEndOutside);
         window.removeEventListener('touchcancel', this.blurOnTouchEndOutside);
@@ -498,6 +552,7 @@ const MathInput = React.createClass({
     },
 
     handleTouchStart(e) {
+        console.log("math-input: handleTouchStart");
         e.stopPropagation();
 
         // Hide the cursor handle on touch start, if the handle itself isn't
@@ -534,6 +589,7 @@ const MathInput = React.createClass({
     },
 
     handleTouchEnd(e) {
+        console.log("math-input:2 handleTouchEnd");
         e.stopPropagation();
 
         // And on touch-end, reveal the cursor, unless the input is empty.
@@ -549,6 +605,7 @@ const MathInput = React.createClass({
      * @param {TouchEvent} e - the raw touch event from the browser
      */
     onCursorHandleTouchStart(e) {
+        console.log("math-input: onCursorHandleTouchStart");
         // NOTE(charlie): The cursor handle is a child of this view, so whenever
         // it receives a touch event, that event would also typically be bubbled
         // up to our own handlers. However, we want the cursor to handle its own
@@ -634,6 +691,7 @@ const MathInput = React.createClass({
      * @param {TouchEvent} e - the raw touch event from the browser
      */
     onCursorHandleTouchEnd(e) {
+        console.log("math-input:   onCursorHandleTouchEnd");
         e.stopPropagation();
 
         this._updateCursorHandle(true);
@@ -691,10 +749,11 @@ const MathInput = React.createClass({
 
         return <View
             style={styles.input}
+            onClick={this.handleTouchStart}
             onTouchStart={this.handleTouchStart}
             onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}
-            onClick={e => e.stopPropagation()}
+            //onClick={e => e.stopPropagation()}
             role={'textbox'}
             ariaLabel={i18n._('Math input box')}
         >
@@ -713,6 +772,7 @@ const MathInput = React.createClass({
             </div>
             {focused && handle.visible && <CursorHandle
                 {...handle}
+                onClick={this.onCursorHandleTouchStart}
                 onTouchStart={this.onCursorHandleTouchStart}
                 onTouchMove={this.onCursorHandleTouchMove}
                 onTouchEnd={this.onCursorHandleTouchEnd}

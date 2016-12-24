@@ -128,6 +128,7 @@ class PopoverStateMachine {
      *                      ended
      */
     onTouchEnd(id) {
+        console.log("PopoverStateMachine: onTouchEnd");
         const inPopover = !!this.activePopover;
         if (inPopover) {
             // If we have a popover that is currently active, we trigger a

@@ -81,6 +81,44 @@ class GestureManager {
     }
 
     /**
+     * Handle a click event that originated in a node registered with the
+     * gesture system.
+     *
+     * @param {TouchEvent} evt - the raw touch event from the browser
+     * @param {string} id - the identifier of the DOM node in which the touch
+     *                      occurred
+     */
+    onClickStart(evt, id) {
+        console.log("gesture-manager: onClickStart");
+        if (!this.trackEvents) {
+            return;
+        }
+
+        const x = evt.clientX;
+        const y = evt.clientY;
+
+        // this.gestureStateMachine.onTouchStart(
+        //         () => id,
+        //         evt.identifier,
+        //         x
+        //     );
+
+        this.gestureStateMachine.onTouchStart(
+                () => id,
+                evt.identifier,
+                x
+            );
+        
+        // If an event started in a view that we're managing, we'll handle it
+        // all the way through.
+        evt.preventDefault();
+
+
+        this.onClickEnd(evt);
+
+    }
+
+    /**
      * Handle a touch-start event that originated in a node registered with the
      * gesture system.
      *
@@ -89,6 +127,7 @@ class GestureManager {
      *                      occurred
      */
     onTouchStart(evt, id) {
+        console.log("gesture-manager onTouchStart");
         if (!this.trackEvents) {
             return;
         }
@@ -110,6 +149,7 @@ class GestureManager {
         // If an event started in a view that we're managing, we'll handle it
         // all the way through.
         evt.preventDefault();
+
     }
 
     /**
@@ -143,6 +183,7 @@ class GestureManager {
      * @param {TouchEvent} evt - the raw touch event from the browser
      */
     onTouchEnd(evt) {
+        console.log("gesture-manager: onTouchEnd");
         if (!this.trackEvents) {
             return;
         }
@@ -155,6 +196,30 @@ class GestureManager {
                 x
             );
         }
+    }
+
+    /**
+     * Handle a touch-end event that originated in a node registered with the
+     * gesture system.
+     *
+     * @param {TouchEvent} evt - the raw touch event from the browser
+     */
+    onClickEnd(evt) {
+        console.log("gesture-manager: onClickEnd");
+        if (!this.trackEvents) {
+            return;
+        }
+
+        const x = evt.clientX;
+        const y = evt.clientY;
+
+        
+            this.gestureStateMachine.onTouchEnd(
+                () => this.nodeManager.idForCoords(x, y),
+                evt.identifier,
+                x
+            );
+        
     }
 
     /**

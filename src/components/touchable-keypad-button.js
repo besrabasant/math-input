@@ -54,6 +54,7 @@ const TouchableKeypadButton = React.createClass({
         const eventHandlers = disabled ? {
             onTouchStart: (evt) => evt.preventDefault(),
         } : {
+            onClick: (evt) => gestureManager.onClickStart(evt, id),
             onTouchStart: (evt) => gestureManager.onTouchStart(evt, id),
             onTouchEnd: (evt) => gestureManager.onTouchEnd(evt),
             onTouchMove: (evt) => gestureManager.onTouchMove(evt),

@@ -148,6 +148,7 @@ class GestureStateMachine {
      * @param {number} touchId - a unique identifier associated with the touch
      */
     onTouchStart(getId, touchId, pageX) {
+        console.log("gesture-state-machine.onTouchStart");
         // Ignore any touch events that start mid-swipe.
         if (this.swipeState) {
             return;
@@ -228,6 +229,7 @@ class GestureStateMachine {
      * @param {number} pageX - the x coordinate of the touch
      */
     onTouchEnd(getId, touchId, pageX) {
+        console.log("gesture-state-machine: onTouchEnd");
         if (this.swipeState) {
             // Only respect the finger that started a swipe. Any other lingering
             // gestures are ignored.

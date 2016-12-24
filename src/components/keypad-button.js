@@ -46,6 +46,7 @@ const KeypadButton = React.createClass({
         onTouchCancel: React.PropTypes.func,
         onTouchEnd: React.PropTypes.func,
         onTouchMove: React.PropTypes.func,
+        onClick: React.PropTypes.func,
         onTouchStart: React.PropTypes.func,
         popoverEnabled: React.PropTypes.bool,
         style: React.PropTypes.any,
@@ -190,6 +191,7 @@ const KeypadButton = React.createClass({
             onTouchEnd,
             onTouchMove,
             onTouchStart,
+            onClick,
             popoverEnabled,
             style,
             type,
@@ -207,7 +209,7 @@ const KeypadButton = React.createClass({
         ];
 
         const eventHandlers = {
-            onTouchCancel, onTouchEnd, onTouchMove, onTouchStart,
+            onTouchCancel, onTouchEnd, onTouchMove, onTouchStart, onClick,
         };
 
         const maybeFocusBox = renderFocused && <View style={focusStyle} />;

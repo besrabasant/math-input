@@ -74,6 +74,7 @@ const CursorHandle = React.createClass({
 
         return <span
             style={outerStyle}
+            onClick={this.props.onTouchStart}
             onTouchStart={this.props.onTouchStart}
             onTouchMove={this.props.onTouchMove}
             onTouchEnd={this.props.onTouchEnd}
