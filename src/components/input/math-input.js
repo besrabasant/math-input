@@ -580,6 +580,32 @@ const MathInput = React.createClass({
         }
     },
 
+    handleClickStart(e) {
+        console.log("math-input: handleClickStart");
+        e.stopPropagation();
+
+        // Hide the cursor handle on touch start, if the handle itself isn't
+        // handling the touch event.
+        this._hideCursorHandle();
+
+        // Cache the container bounds, so as to avoid re-computing. If we don't
+        // have any content, then it's not necessary, since the cursor can't be
+        // moved anyway.
+        if (this.mathField.getContent() !== "") {
+            this._containerBounds = this._container.getBoundingClientRect();
+
+            // Make the cursor visible and set the handle-less cursor's
+            // location.
+            // const touch = e.changedTouches[0];
+            this._insertCursorAtClosestNode(e.clientX, e.clientY);
+        }
+
+        // Trigger a focus event, if we're not already focused.
+        if (!this.state.focused) {
+            this.focus();
+        }
+    },
+
     handleTouchMove(e) {
         e.stopPropagation();
 
@@ -752,7 +778,7 @@ const MathInput = React.createClass({
 
         return <View
             style={styles.input}
-            onClick={this.handleTouchStart}
+            onClick={this.handleClickStart}
             onTouchStart={this.handleTouchStart}
             onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}
