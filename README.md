@@ -1,5 +1,7 @@
 # math-input
 
+## Description from original Khan project
+
 Khan Academy's new expression editor for the mobile web. Used in the [Perseus](https://github.com/khan/perseus) exercise framework to power math input and expression editing on small screens.
 
 Built with [React](https://github.com/facebook/react), [Redux](https://github.com/reactjs/redux), [MathQuill](https://github.com/mathquill/mathquill), [Aphrodite](https://github.com/khan/aphrodite), and more.
@@ -18,11 +20,15 @@ Built with [React](https://github.com/facebook/react), [Redux](https://github.co
 
 ![](https://cloud.githubusercontent.com/assets/1309177/15994912/d2b60cdc-30c5-11e6-8eb4-9086d76f327c.gif)
 
-## Demo
+## Additional changes and Demo
 
-A live demo is available via [GitHub Pages](http://khan.github.io/math-input/). You can configure some of the keypad's behaviors, along with the set of active keys, via the [editor](http://khan.github.io/math-input/custom.html).
+- Click is supported (implemented as touchStart+touchEnd) so now it works in non-mobile browsers
+- there is not a hard-coding to a "root" div, but one or many divs of class "math-input"
+- value is accesible via an attribute in the containing div, so values can be used in later forms or read from other javascript code
 
-Note that, as the input and keypad only respond to touch events, you'll need to enable mobile emulation mode (e.g., as supported by Chrome) in order to use the keypad in a desktop browser.
+A live demo is available via [GitHub Pages](https://f-alonso-vendrell.github.io/math-input/). 
+
+Note that, in this version, there is no need to enable mobile emulation mode in order to use the keypad in a desktop browser.
 
 To run the demo locally, clone the repo, `npm install`, `npm run watch`, and open the `index.html` page. The local behaviors can similarly be customized via the editor @ `custom.html`.
 
