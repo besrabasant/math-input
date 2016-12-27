@@ -26,7 +26,10 @@ const App = React.createClass({
                 <KeypadInput
                     value={this.state.value}
                     keypadElement={this.state.keypadElement}
-                    onChange={(value, cb) => this.setState({value}, cb)}
+                    onChange={(value, cb) => { 
+                        this.setState({value}, cb); 
+                        var mydiv = document.getElementById(this.props.containerid);
+                        mydiv.setAttribute("math-input-value", {value}.value); } }
                     onFocus={() => this.state.keypadElement.activate()}
                     onBlur={() => this.state.keypadElement.dismiss()}
                 />
