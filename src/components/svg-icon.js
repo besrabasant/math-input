@@ -3,14 +3,15 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const ReactDOM = require('react-dom');
 
 const Iconography = require('./iconography');
 
 const SvgIcon = React.createClass({
     propTypes: {
-        color: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
     },
 
     componentDidMount() {

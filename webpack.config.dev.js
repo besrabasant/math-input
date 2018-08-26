@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 const config = require('./webpack.config');
 
@@ -13,5 +14,11 @@ config.plugins = [
 ];
 
 config.devtool = '#eval-source-map';
+
+config.devServer = {
+    contentBase: path.join(__dirname, "./"),
+    compress: true,
+    port: 9000
+  };
 
 module.exports = config;

@@ -3,6 +3,7 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const PureRenderMixin = require('react-addons-pure-render-mixin');
 const {StyleSheet} = require('aphrodite');
 
@@ -18,12 +19,12 @@ const unfocusedColor = gray25;
 
 const Icon = React.createClass({
     propTypes: {
-        focused: React.PropTypes.bool,
+        focused: PropTypes.bool,
         icon: iconPropType.isRequired,
         // An Aphrodite style object, or an array of Aphrodite style objects.
         // Note that custom styles will only be applied to text and math icons
         // (and not SVG icons).
-        style: React.PropTypes.any,
+        style: PropTypes.any,
     },
 
     mixins: [PureRenderMixin],

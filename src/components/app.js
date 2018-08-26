@@ -1,11 +1,12 @@
 const React = require('react');
+const createReactClass = require('create-react-class');
 
 const {View} = require('../fake-react-native-web');
 const {components} = require('../index');
 
 const {Keypad, KeypadInput} = components;
 
-const App = React.createClass({
+const App = createReactClass({
     getInitialState() {
         return {
             keypadElement: null,
@@ -26,8 +27,8 @@ const App = React.createClass({
                 <KeypadInput
                     value={this.state.value}
                     keypadElement={this.state.keypadElement}
-                    onChange={(value, cb) => { 
-                        this.setState({value}, cb); 
+                    onChange={(value, cb) => {
+                        this.setState({value}, cb);
                         var mydiv = document.getElementById(this.props.containerid);
                         mydiv.setAttribute("math-input-value", {value}.value); } }
                     onFocus={() => this.state.keypadElement.activate()}

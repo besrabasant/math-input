@@ -3,6 +3,7 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const ReactDOM = require('react-dom');
 const {StyleSheet} = require('aphrodite');
 
@@ -12,8 +13,8 @@ const {iconSizeHeightPx, iconSizeWidthPx} = require('./common-style');
 
 const MathIcon = React.createClass({
     propTypes: {
-        math: React.PropTypes.string.isRequired,
-        style: React.PropTypes.any,
+        math: PropTypes.string.isRequired,
+        style: PropTypes.any,
     },
 
     componentDidMount() {

@@ -1,26 +1,28 @@
 const React = require('react');
+const createReactClass = require('create-react-class');
+const PropTypes = require('prop-types');
 const {StyleSheet, css} = require('aphrodite');
 
-const View = React.createClass({
+const View = createReactClass({
     propTypes: {
-        ariaLabel: React.PropTypes.string,
-        children: React.PropTypes.oneOfType([
-            React.PropTypes.arrayOf(React.PropTypes.node),
-            React.PropTypes.node,
+        ariaLabel: PropTypes.string,
+        children: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.node),
+            PropTypes.node,
         ]),
         // The `dynamicStyle` prop is provided for animating dynamic
         // properties, as creating Aphrodite StyleSheets in animation loops is
         // expensive. `dynamicStyle` should be a raw style object, rather than
         // a StyleSheet.
-        dynamicStyle: React.PropTypes.any,
-        numberOfLines: React.PropTypes.number,
-        onClick: React.PropTypes.func,
-        onTouchCancel: React.PropTypes.func,
-        onTouchEnd: React.PropTypes.func,
-        onTouchMove: React.PropTypes.func,
-        onTouchStart: React.PropTypes.func,
-        role: React.PropTypes.string,
-        style: React.PropTypes.any,
+        dynamicStyle: PropTypes.any,
+        numberOfLines: PropTypes.number,
+        onClick: PropTypes.func,
+        onTouchCancel: PropTypes.func,
+        onTouchEnd: PropTypes.func,
+        onTouchMove: PropTypes.func,
+        onTouchStart: PropTypes.func,
+        role: PropTypes.string,
+        style: PropTypes.any,
     },
 
     statics: {

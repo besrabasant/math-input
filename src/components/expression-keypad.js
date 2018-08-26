@@ -3,6 +3,7 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const {connect} = require('react-redux');
 const {StyleSheet} = require('aphrodite');
 
@@ -26,12 +27,12 @@ const CursorContexts = require('./input/cursor-contexts');
 
 const ExpressionKeypad = React.createClass({
     propTypes: {
-        currentPage: React.PropTypes.number.isRequired,
+        currentPage: PropTypes.number.isRequired,
         cursorContext: cursorContextPropType.isRequired,
-        dynamicJumpOut: React.PropTypes.bool,
-        extraKeys: React.PropTypes.arrayOf(keyIdPropType),
-        roundTopLeft: React.PropTypes.bool,
-        roundTopRight: React.PropTypes.bool,
+        dynamicJumpOut: PropTypes.bool,
+        extraKeys: PropTypes.arrayOf(keyIdPropType),
+        roundTopLeft: PropTypes.bool,
+        roundTopRight: PropTypes.bool,
     },
 
     statics: {

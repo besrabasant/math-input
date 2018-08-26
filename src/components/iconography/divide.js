@@ -4,10 +4,11 @@
  * Generated with: https://gist.github.com/crm416/3c7abc88e520eaed72347af240b32590.
  */
 const React = require('react');
+const PropTypes = require('prop-types');
 
 const Divide = React.createClass({
     propTypes: {
-        color: React.PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
     },
 
     render() {

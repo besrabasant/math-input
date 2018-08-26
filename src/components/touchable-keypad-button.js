@@ -5,6 +5,8 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
+const createReactClass = require('create-react-class');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 
@@ -14,17 +16,17 @@ const GestureManager = require('./gesture-manager');
 const {bordersPropType, keyIdPropType} = require('./prop-types');
 const {KeyTypes} = require('../consts');
 
-const TouchableKeypadButton = React.createClass({
+const TouchableKeypadButton = createReactClass({
     propTypes: {
         borders: bordersPropType,
-        childKeyIds: React.PropTypes.arrayOf(keyIdPropType),
-        disabled: React.PropTypes.bool,
-        focused: React.PropTypes.bool,
-        gestureManager: React.PropTypes.instanceOf(GestureManager),
+        childKeyIds: PropTypes.arrayOf(keyIdPropType),
+        disabled: PropTypes.bool,
+        focused: PropTypes.bool,
+        gestureManager: PropTypes.instanceOf(GestureManager),
         id: keyIdPropType.isRequired,
-        popoverEnabled: React.PropTypes.bool,
-        style: React.PropTypes.any,
-        type: React.PropTypes.oneOf(Object.keys(KeyTypes)).isRequired,
+        popoverEnabled: PropTypes.bool,
+        style: PropTypes.any,
+        type: PropTypes.oneOf(Object.keys(KeyTypes)).isRequired,
     },
 
     shouldComponentUpdate(newProps) {
@@ -107,4 +109,4 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-module.exports = connect(mapStateToProps)(TouchableKeypadButton);
+module.exports = connect(mapStateToProps, null)(TouchableKeypadButton);

@@ -1,6 +1,8 @@
 /* globals i18n */
 
 const React = require('react');
+const PropTypes = require('prop-types');
+const createReactClass = require('create-react-class');
 const ReactDOM = require('react-dom');
 const {StyleSheet} = require("aphrodite");
 
@@ -19,7 +21,7 @@ const {brightGreen, gray17} = require('../common-style');
 
 const constrainingFrictionFactor = 0.8;
 
-const MathInput = React.createClass({
+const MathInput = createReactClass({
     propTypes: {
         // The React element node associated with the keypad that will send
         // key-press events to this input. If provided, this can be used to:
@@ -27,16 +29,16 @@ const MathInput = React.createClass({
         //   (2) Scroll the input into view, if it would otherwise be obscured
         //       by the keypad on focus.
         keypadElement: keypadElementPropType,
-        onBlur: React.PropTypes.func,
-        onChange: React.PropTypes.func.isRequired,
-        onFocus: React.PropTypes.func,
+        onBlur: PropTypes.func,
+        onChange: PropTypes.func.isRequired,
+        onFocus: PropTypes.func,
         // Whether the input should be scrollable. This is typically only
         // necessary when a fixed width has been provided through the `style`
         // prop.
-        scrollable: React.PropTypes.bool,
+        scrollable: PropTypes.bool,
         // An extra, vanilla style object, to be applied to the math input.
-        style: React.PropTypes.any,
-        value: React.PropTypes.string,
+        style: PropTypes.any,
+        value: PropTypes.string,
     },
 
     getDefaultProps() {
@@ -151,7 +153,7 @@ const MathInput = React.createClass({
                         this.didScroll = false;
                     }
 
-                   
+
                 }
             }
 
